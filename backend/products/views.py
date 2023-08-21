@@ -2,6 +2,9 @@ from rest_framework import generics, mixins, permissions, authentication
 from .models import Product
 from .serializers import ProductSerializer
 from .permissions import IsStaffEditorPermissions
+from api.authentications import TokenAuthentication
+
+
 # class ProdoctMixinAPIView(
 #     mixins.CreateModelMixin,
 #     mixins.ListModelMixin,
@@ -47,7 +50,8 @@ from .permissions import IsStaffEditorPermissions
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [authentication.SessionAuthentication,
+                              TokenAuthentication]
     permission_classes = [IsStaffEditorPermissions]
 
     def perform_create(self, serializer):
