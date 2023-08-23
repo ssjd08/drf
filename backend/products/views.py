@@ -50,8 +50,10 @@ from api.authentications import TokenAuthentication
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication,
-                              TokenAuthentication]
+    
+    # because of rest framework settings in settings.py we dont need this here any more.:
+    #authentication_classes = [authentication.SessionAuthentication,
+    #                           TokenAuthentication]
     permission_classes = [IsStaffEditorPermissions]
 
     def perform_create(self, serializer):
